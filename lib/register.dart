@@ -13,7 +13,7 @@ class Registerscreen extends StatefulWidget {
 
 File? _image;
 final ImagePicker _picker = ImagePicker();
-final base_url = 'http://192.168.1.35:5000';
+final base_url = 'http://192.168.29.122:5000';
 Dio dio = Dio();
 
 class _RegisterscreenState extends State<Registerscreen> {

@@ -10,6 +10,7 @@ class Loginscreen extends StatefulWidget {
 }
 
 int? LID;
+String? usertype;
 
 class _LoginscreenState extends State<Loginscreen> {
   TextEditingController username = TextEditingController();
@@ -27,13 +28,20 @@ class _LoginscreenState extends State<Loginscreen> {
         data: {'Username': username.text, 'Password': password.text},
       );
 
-      print(response.data);
+      print("_________+_+_++_+_,${response.data}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         LID = response.data['login_id'];
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
+        usertype = response.data['usertype'];
+        if (usertype == "approve") {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        } else {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('need to verify')));
+        }
       } else {
         ScaffoldMessenger.of(
           context,
